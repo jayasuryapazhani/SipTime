@@ -4,19 +4,81 @@
 
 :root {
   font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
     sans-serif;
-  color: #0c4a6e;
-  background: #e0f2fe;
+
+  color: #d8e9ee;
+  background: #06141e;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
+  --water-bg: #06141e;
+  --water-bg-deep: #030c13;
+  --water-bg-soft: #09222f;
+
+  --water-surface: #0d2937;
+  --water-surface-raised: #123646;
+  --water-surface-muted: #0a202c;
+  --water-surface-input: #0b2431;
+
+--water-primary: #5fb4cb;
+--water-primary-hover: #78c9dc;
+--water-primary-soft: #91d4e2;
+  --water-primary-dark: #34778d;
+  --water-primary-faint: rgb(79 159 182 / 15%);
+
+--water-text: #e1eff3;
+--water-text-strong: #ffffff;
+--water-text-muted: #b4c9cf;
+--water-text-faint: #91aab2;
+
+  --water-line: rgb(123 196 213 / 27%);
+  --water-line-soft: rgb(123 196 213 / 15%);
+  --water-line-faint: rgb(123 196 213 / 8%);
+
+  --water-success: #6db09f;
+  --water-success-bg: rgb(59 121 106 / 18%);
+
+  --water-warning: #d1aa68;
+  --water-warning-bg: rgb(156 113 52 / 18%);
+
+  --water-error: #e28d88;
+  --water-error-bg: rgb(145 61 59 / 20%);
+
+  --water-shadow-small:
+    2px 3px 0 rgb(1 8 12 / 24%);
+
+  --water-shadow-medium:
+    4px 6px 0 rgb(1 8 12 / 28%);
+
+  --water-radius-small:
+    8px 11px 7px 10px;
+
+  --water-radius-medium:
+    12px 9px 14px 10px;
+
+  --water-radius-large:
+    16px 12px 18px 14px;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html,
+html {
+  min-height: 100%;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
 body,
 #root {
   min-height: 100%;
@@ -25,157 +87,895 @@ body,
 body {
   margin: 0;
   min-width: 320px;
-  background: #e0f2fe;
+  overflow-x: clip;
+  overflow-y: visible;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgb(130 197 212 / 1.5%) 0,
+      rgb(130 197 212 / 1.5%) 1px,
+      transparent 1px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgb(130 197 212 / 1%) 0,
+      rgb(130 197 212 / 1%) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    var(--water-bg);
+
+  color: var(--water-text);
+  line-height: 1.5;
 }
 
+#root {
+  overflow: visible;
+}
+
+body,
 button,
 input {
   font: inherit;
 }
 
-button:focus-visible,
-input:focus-visible {
-  outline: 3px solid rgba(14, 165, 233, 0.3);
-  outline-offset: 2px;
+button,
+input {
+  border: 0;
 }
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 3px solid rgb(101 182 204 / 32%);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: inherit;
+}
+
+svg {
+  display: block;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #396f80 #071923;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #071923;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid #071923;
+  border-radius: 999px;
+  background: #396f80;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #4f91a4;
+}
+
+.water-heading {
+  margin: 0;
+
+  color: var(--water-text-strong);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.water-text {
+  color: var(--water-text);
+}
+
+.water-text-strong {
+  color: var(--water-text-strong);
+}
+
+.water-muted {
+  color: var(--water-text-muted);
+}
+
+.water-faint {
+  color: var(--water-text-faint);
+}
+
+/* Shared dark-water background */
 
 .water-background {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+
+  overflow-x: clip;
+  overflow-y: visible;
+
   background:
-    radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.9), transparent 28%),
-    radial-gradient(circle at 90% 22%, rgba(103, 232, 249, 0.42), transparent 32%),
-    linear-gradient(155deg, #f0f9ff 0%, #bae6fd 46%, #67e8f9 100%);
+    radial-gradient(
+      circle at 86% 8%,
+      rgb(79 159 182 / 14%),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 12% 76%,
+      rgb(28 105 132 / 12%),
+      transparent 31%
+    ),
+    radial-gradient(
+      circle at 45% 35%,
+      rgb(255 255 255 / 2.5%),
+      transparent 24%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgb(130 197 212 / 1.5%) 0,
+      rgb(130 197 212 / 1.5%) 1px,
+      transparent 1px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgb(130 197 212 / 1%) 0,
+      rgb(130 197 212 / 1%) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    linear-gradient(
+      145deg,
+      #071923 0%,
+      #0a2634 48%,
+      #04111a 100%
+    );
 }
 
 .water-background::before,
 .water-background::after {
   position: absolute;
   z-index: -2;
-  border-radius: 9999px;
+
+  border-radius: 50%;
+
   content: "";
-  filter: blur(4px);
+  pointer-events: none;
 }
 
 .water-background::before {
-  top: -80px;
-  right: -70px;
-  width: 220px;
-  height: 220px;
-  background: rgba(255, 255, 255, 0.35);
+  top: -160px;
+  right: -130px;
+
+  width: 340px;
+  height: 340px;
+
+  background: rgb(79 159 182 / 8%);
 }
 
 .water-background::after {
-  bottom: 40px;
-  left: -90px;
-  width: 190px;
-  height: 190px;
-  background: rgba(2, 132, 199, 0.14);
+  bottom: 70px;
+  left: -170px;
+
+  width: 330px;
+  height: 330px;
+
+  background: rgb(29 101 126 / 9%);
 }
 
+/* Main dark panels */
+
 .water-glass {
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.76);
-  box-shadow:
-    0 18px 45px rgba(3, 105, 161, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(18px);
+  position: relative;
+
+  border: 1.35px solid var(--water-line);
+  border-radius: var(--water-radius-large);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgb(18 54 70 / 96%),
+      rgb(11 38 51 / 96%)
+    );
+
+  box-shadow: var(--water-shadow-medium);
 }
+
+.water-glass::after {
+  position: absolute;
+  z-index: 0;
+  inset: 3px -3px -3px 3px;
+
+  border: 1px solid var(--water-line-faint);
+  border-radius: inherit;
+
+  content: "";
+  pointer-events: none;
+}
+
+.water-glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+.water-panel-large {
+  border-radius: var(--water-radius-large);
+}
+
+.water-panel-medium {
+  border-radius: var(--water-radius-medium);
+}
+
+.water-control {
+  border-radius: var(--water-radius-small);
+}
+
+.water-inner-panel {
+  border: 1.25px solid var(--water-line-soft);
+  border-radius: var(--water-radius-medium);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgb(10 33 45 / 90%),
+      rgb(8 27 38 / 92%)
+    );
+
+  box-shadow: var(--water-shadow-small);
+}
+
+.water-icon-tile {
+  display: grid;
+
+  place-items: center;
+
+  border: 1px solid rgb(123 196 213 / 30%);
+  border-radius: var(--water-radius-medium);
+
+  background:
+    linear-gradient(
+      145deg,
+      #438da2,
+      #296d83
+    );
+
+  color: #effafd;
+
+  box-shadow: var(--water-shadow-small);
+}
+
+/* Inputs */
+
+.water-input {
+  width: 100%;
+
+  border: 1.25px solid var(--water-line-soft);
+  border-radius: var(--water-radius-small);
+
+  background: var(--water-surface-input);
+  color: var(--water-text-strong);
+
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 2%);
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.water-input::placeholder {
+  color: var(--water-text-faint);
+}
+
+.water-input:hover:not(:disabled) {
+  border-color: rgb(123 196 213 / 28%);
+}
+
+.water-input:focus {
+  border-color: var(--water-primary);
+
+  background: #0d2b39;
+
+  box-shadow:
+    inset 0 0 0 2px rgb(79 159 182 / 14%);
+
+  outline: none;
+}
+
+.water-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Buttons */
+
+.water-primary-button {
+  border: 1.3px solid #92d9e8;
+  border-radius: var(--water-radius-small);
+
+  background:
+    linear-gradient(
+      145deg,
+      #62b9cf,
+      #438fa6
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0 1px rgb(146 217 232 / 10%),
+    0 8px 20px rgb(0 0 0 / 22%);
+
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.water-primary-button:hover:not(:disabled) {
+  border-color: #b6edf6;
+
+  background:
+    linear-gradient(
+      145deg,
+      #79ccde,
+      #52a5bb
+    );
+
+  box-shadow:
+    0 0 0 3px rgb(121 204 222 / 10%),
+    0 10px 24px rgb(0 0 0 / 26%);
+
+  transform: translateY(-1px);
+}
+
+.water-primary-button:disabled {
+  opacity: 0.38;
+  box-shadow: none;
+}
+
+.water-secondary-button {
+  border: 1.25px solid var(--water-line);
+  border-radius: var(--water-radius-small);
+
+  background: #0b2633;
+  color: var(--water-text);
+
+  box-shadow: var(--water-shadow-small);
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.water-secondary-button:hover:not(:disabled) {
+  border-color: var(--water-primary);
+
+  background: #103442;
+  color: var(--water-text-strong);
+
+  transform: translateY(-1px) rotate(-0.08deg);
+}
+
+.water-secondary-button:disabled {
+  opacity: 0.4;
+}
+
+/* Switch */
+
+.water-switch {
+  position: relative;
+
+  display: inline-flex;
+
+  width: 48px;
+  height: 28px;
+
+  flex-shrink: 0;
+  align-items: center;
+
+  border: 1px solid var(--water-line-soft);
+  border-radius: 999px;
+
+  background: #102b37;
+
+  transition:
+    background 150ms ease,
+    border-color 150ms ease;
+}
+
+.water-switch[data-checked="true"] {
+  border-color: #68b7c9;
+
+  background:
+    linear-gradient(
+      90deg,
+      #397f95,
+      #55a8bc
+    );
+}
+
+.water-switch-knob {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 999px;
+
+  background: #eaf6f8;
+
+  box-shadow:
+    0 2px 5px rgb(0 0 0 / 30%);
+
+  transform: translateX(4px);
+
+  transition: transform 150ms ease;
+}
+
+.water-switch[data-checked="true"] .water-switch-knob {
+  transform: translateX(23px);
+}
+
+/* Segmented control */
+
+.water-segmented {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  padding: 4px;
+
+  border: 1px solid var(--water-line-soft);
+  border-radius: var(--water-radius-medium);
+
+  background: #081e29;
+}
+
+.water-segmented-button {
+  min-height: 42px;
+
+  border-radius: var(--water-radius-small);
+
+  background: transparent;
+  color: var(--water-text-muted);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.water-segmented-button:hover {
+  color: var(--water-text);
+}
+
+.water-segmented-button[data-active="true"] {
+  background: #123b4b;
+  color: var(--water-text-strong);
+
+  box-shadow: var(--water-shadow-small);
+}
+
+/* Interval chips */
+
+.water-chip {
+  min-height: 40px;
+  padding: 0 16px;
+
+  border: 1px solid var(--water-line-soft);
+  border-radius: var(--water-radius-small);
+
+  background: #0a2430;
+  color: var(--water-text-muted);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.water-chip:hover {
+  border-color: rgb(123 196 213 / 34%);
+
+  background: #10313f;
+  color: var(--water-text);
+}
+
+.water-chip[data-active="true"] {
+  border-color: #64afc1;
+
+  background:
+    linear-gradient(
+      145deg,
+      #3e869b,
+      #2e7085
+    );
+
+  color: #f1f9fb;
+
+  box-shadow: var(--water-shadow-small);
+}
+
+/* Status */
+
+.water-status {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 8px;
+
+  border: 1px solid var(--water-line-soft);
+  border-radius: 999px;
+
+  background: #0a2430;
+  color: var(--water-text-muted);
+}
+
+.water-status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 999px;
+
+  background: var(--water-primary);
+}
+
+.water-status-dot-success {
+  background: var(--water-success);
+}
+
+.water-status-dot-warning {
+  background: var(--water-warning);
+}
+
+.water-status-success {
+  border: 1px solid rgb(109 176 159 / 30%);
+  border-radius: 999px;
+
+  background: var(--water-success-bg);
+  color: #98cfc1;
+}
+
+.water-status-warning {
+  border: 1px solid rgb(209 170 104 / 30%);
+  border-radius: 999px;
+
+  background: var(--water-warning-bg);
+  color: #dfbd84;
+}
+
+.water-error-message {
+  border: 1px solid rgb(226 141 136 / 34%);
+  border-radius: var(--water-radius-medium);
+
+  background: var(--water-error-bg);
+  color: #f1aaa6;
+}
+
+/* Decorative water elements */
 
 .water-wave {
   position: absolute;
   z-index: -1;
   left: -15%;
+
   width: 130%;
+
   border-radius: 45% 55% 0 0;
+
   transform-origin: center;
+  pointer-events: none;
 }
 
 .water-wave-one {
-  bottom: -50px;
-  height: 135px;
-  background: rgba(14, 165, 233, 0.19);
-  animation: water-drift 9s ease-in-out infinite;
+  bottom: -80px;
+
+  height: 124px;
+
+  background: rgb(58 139 162 / 8%);
+
+  animation: water-drift 13s ease-in-out infinite;
 }
 
 .water-wave-two {
-  bottom: -72px;
-  height: 145px;
-  background: rgba(2, 132, 199, 0.17);
-  animation: water-drift-reverse 12s ease-in-out infinite;
+  bottom: -98px;
+
+  height: 132px;
+
+  background: rgb(101 182 204 / 5%);
+
+  animation: water-drift-reverse 16s ease-in-out infinite;
 }
 
 .water-bubble {
   position: absolute;
   z-index: -1;
-  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  border: 1px solid rgb(123 196 213 / 13%);
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.24);
-  animation: bubble-float 7s ease-in-out infinite;
+
+  background: rgb(79 159 182 / 3%);
+
+  animation: bubble-float 10s ease-in-out infinite;
+
+  pointer-events: none;
 }
+
+/* Popup timer */
 
 .water-timer {
   position: relative;
+
   display: grid;
-  width: 178px;
-  height: 178px;
+
+  width: 150px;
+  height: 150px;
+
   place-items: center;
   overflow: hidden;
-  border: 9px solid rgba(255, 255, 255, 0.72);
-  border-radius: 9999px;
-  background: rgba(240, 249, 255, 0.86);
+
+  border: 1.35px solid rgb(123 196 213 / 34%);
+  border-radius: 50%;
+
+  background: #0c2a37;
+
   box-shadow:
-    0 20px 45px rgba(2, 132, 199, 0.2),
-    inset 0 0 0 1px rgba(14, 165, 233, 0.13);
+    3px 5px 0 rgb(0 0 0 / 23%),
+    inset 0 0 0 6px rgb(123 196 213 / 5%);
+}
+
+.water-timer::after {
+  position: absolute;
+  z-index: 0;
+  inset: 6px;
+
+  border: 1px solid var(--water-line-faint);
+  border-radius: 50%;
+
+  content: "";
+  pointer-events: none;
 }
 
 .water-timer-liquid {
   position: absolute;
+  z-index: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  height: 53%;
-  background: linear-gradient(180deg, rgba(34, 211, 238, 0.58), rgba(2, 132, 199, 0.72));
+
+  height: 52%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgb(79 169 194 / 47%),
+      rgb(24 111 143 / 72%)
+    );
 }
 
 .water-timer-liquid::before {
   position: absolute;
   top: -12px;
   left: -10%;
+
   width: 120%;
   height: 25px;
+
   border-radius: 48%;
-  background: rgba(240, 249, 255, 0.7);
+
+  background: rgb(13 42 55 / 74%);
+
   content: "";
-  animation: timer-wave 5s ease-in-out infinite;
+
+  animation: timer-wave 7s ease-in-out infinite;
 }
 
 .water-timer-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+
   text-align: center;
 }
+
+/* Navigation */
+
+.water-navigation-link {
+  display: flex;
+
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 12px;
+
+  border-radius: var(--water-radius-small);
+
+  color: var(--water-text-muted);
+
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.water-navigation-link:hover {
+  background: #10313f;
+  color: var(--water-text-strong);
+
+  transform: translateX(2px);
+}
+
+/* Toast */
+
+.water-toast {
+  border: 1px solid var(--water-line);
+  border-radius: var(--water-radius-medium);
+
+  background: #123646;
+  color: var(--water-text-strong);
+
+  box-shadow:
+    0 16px 35px rgb(0 0 0 / 35%);
+}
+
+.water-toast-success {
+  border-color: rgb(109 176 159 / 34%);
+
+  background: #153c38;
+  color: #a2d6c9;
+}
+
+/* Options fixed save bar */
+
+.options-save-bar {
+  border-top: 1px solid var(--water-line);
+
+  background: rgb(5 18 27 / 94%);
+
+  box-shadow:
+    0 -12px 34px rgb(0 0 0 / 25%);
+
+  backdrop-filter: blur(16px);
+}
+
+/* Chrome popup sizing */
+
+html:has(.siptime-popup),
+body:has(.siptime-popup),
+#root:has(.siptime-popup) {
+  width: 430px;
+  min-width: 430px;
+  max-width: 430px;
+
+  min-height: 0;
+  height: auto;
+
+  overflow: hidden;
+}
+
+body:has(.siptime-popup) {
+  margin: 0;
+}
+
+.siptime-popup {
+  width: 430px;
+  min-width: 430px;
+  max-width: 430px;
+
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+
+.options-save-bar[data-unsaved="true"] {
+  border-top-color: rgb(120 201 220 / 38%);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgb(8 30 41 / 98%),
+      rgb(13 47 61 / 98%)
+    );
+
+  box-shadow:
+    0 -8px 28px rgb(0 0 0 / 30%),
+    0 -1px 0 rgb(120 201 220 / 12%);
+}
+
+.options-save-message {
+  color: var(--water-text-muted);
+}
+
+.options-save-bar[data-unsaved="true"] .options-save-message {
+  color: #d5edf2;
+  font-weight: 700;
+}
+.help-tip {
+  border: 1px solid var(--water-line-soft);
+  border-radius: var(--water-radius-medium);
+
+  background: #092430;
+
+  padding: 13px;
+
+  color: var(--water-text-muted);
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.help-tip-label {
+  margin: 0 0 5px;
+
+  color: #7fc8d9;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.help-tip p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+/* Animations */
 
 @keyframes water-drift {
   0%,
   100% {
-    transform: translateX(-2%) rotate(-1deg);
+    transform: translateX(-1.5%) rotate(-0.5deg);
   }
 
   50% {
-    transform: translateX(3%) rotate(1deg);
+    transform: translateX(1.5%) rotate(0.5deg);
   }
 }
 
 @keyframes water-drift-reverse {
   0%,
   100% {
-    transform: translateX(3%) rotate(1deg);
+    transform: translateX(1.5%) rotate(0.5deg);
   }
 
   50% {
-    transform: translateX(-2%) rotate(-1deg);
+    transform: translateX(-1.5%) rotate(-0.5deg);
   }
 }
 
@@ -186,25 +986,38 @@ input:focus-visible {
   }
 
   50% {
-    transform: translateY(-12px);
+    transform: translateY(-8px);
   }
 }
 
 @keyframes timer-wave {
   0%,
   100% {
-    transform: translateX(-3%) rotate(-2deg);
+    transform: translateX(-2%) rotate(-1deg);
   }
 
   50% {
-    transform: translateX(3%) rotate(2deg);
+    transform: translateX(2%) rotate(1deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .water-wave,
   .water-bubble,
   .water-timer-liquid::before {
     animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
