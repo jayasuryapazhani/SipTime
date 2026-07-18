@@ -1,0 +1,50 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { viteStaticCopy } from "vite-plugin-static-copy";
+
+export default defineConfig({
+  publicDir: false,
+
+  plugins: [
+    react(),
+
+    viteStaticCopy({
+      targets: [
+        {
+          src: "manifest.json",
+          dest: "."
+        },
+        {
+          src: "public/icon.png",
+          dest: "."
+        }
+      ]
+    })
+  ],
+
+  build: {
+    outDir: "dist-extension",
+    emptyOutDir: true,
+
+    rollupOptions: {
+      input: {
+        popup: "popup.html",
+        options: "options.html",
+        background: "src/background/background.ts"
+      },
+
+      output: {
+        entryFileNames: (chunk) => {
+          if (chunk.name === "background") {
+            return "background.js";
+          }
+
+          return "assets/[name]-[hash].js";
+        },
+
+        chunkFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash][extname]"
+      }
+    }
+  }
+});
