@@ -37,24 +37,45 @@ export default function PopupApp() {
   }
 
   useEffect(() => {
-    load();
+    let isMounted = true;
 
-    const handler: Parameters<typeof chrome.storage.onChanged.addListener>[0] = (changes, area) => {
+    void Promise.all([getSettings(), getNextFireAt()])
+      .then(([storedSettings, storedNextFireAt]) => {
+        if (!isMounted) return;
+
+        setSettings(storedSettings);
+        setNext(storedNextFireAt);
+      })
+      .catch((error: unknown) => {
+        console.error("Failed to load SipTime popup state:", error);
+      });
+
+    const handler: Parameters<
+      typeof chrome.storage.onChanged.addListener
+    >[0] = (changes, area) => {
       if (area !== "sync") return;
 
       if (changes.waterReminderSettings) {
-        setSettings(changes.waterReminderSettings.newValue as ReminderSettings);
+        setSettings(
+          changes.waterReminderSettings.newValue as ReminderSettings
+        );
       }
+
       if (changes.waterReminderNextFireAt) {
-        const v = changes.waterReminderNextFireAt.newValue;
-        setNext(typeof v === "number" ? v : null);
+        const value = changes.waterReminderNextFireAt.newValue;
+        setNext(typeof value === "number" ? value : null);
       }
     };
 
     chrome.storage.onChanged.addListener(handler);
-    return () => chrome.storage.onChanged.removeListener(handler);
+
+    return () => {
+      isMounted = false;
+      chrome.storage.onChanged.removeListener(handler);
+    };
   }, []);
 
+  
   const nextText = nextFireAt
     ? new Date(nextFireAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
     : "—";
