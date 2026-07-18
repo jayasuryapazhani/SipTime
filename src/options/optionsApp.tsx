@@ -18,6 +18,19 @@ type ToastState = {
   tone: "success" | "info";
 } | null;
 
+function LogoIcon(props: {
+  className?: string;
+  alt?: string;
+}) {
+  return (
+    <img
+      alt={props.alt ?? ""}
+      className={props.className}
+      src={chrome.runtime.getURL("icon.png")}
+    />
+  );
+}
+
 function WaterDropIcon(props: { className?: string }) {
   return (
     <svg
@@ -40,6 +53,7 @@ function WaterDropIcon(props: { className?: string }) {
     </svg>
   );
 }
+
 
 function ClockIcon() {
   return (
@@ -784,8 +798,11 @@ export default function OptionsApp() {
     return (
       <main className="water-background grid min-h-screen place-items-center px-6">
         <div className="water-glass px-8 py-7 text-center">
-          <div className="water-icon-tile mx-auto h-14 w-14">
-            <WaterDropIcon className="h-8 w-8" />
+          <div className="brand-logo-tile mx-auto h-14 w-14">
+            <LogoIcon
+              alt=""
+              className="brand-logo-image"
+            />
           </div>
 
           <p className="water-muted mt-4 text-sm font-semibold">
@@ -831,8 +848,11 @@ export default function OptionsApp() {
         <header className="water-glass p-5 sm:p-7">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-4">
-              <div className="water-icon-tile h-14 w-14 shrink-0">
-                <WaterDropIcon className="h-8 w-8" />
+              <div className="brand-logo-tile h-14 w-14 shrink-0">
+                <LogoIcon
+                  alt=""
+                  className="brand-logo-image"
+                />
               </div>
 
               <div>

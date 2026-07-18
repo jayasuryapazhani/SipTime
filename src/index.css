@@ -342,7 +342,31 @@ svg {
 
   box-shadow: var(--water-shadow-small);
 }
+/* SipTime brand logo */
 
+.brand-logo-tile {
+  display: grid;
+
+  place-items: center;
+  overflow: hidden;
+
+  border: none;
+  border-radius: var(--water-radius-medium);
+
+  background: transparent;
+
+}
+
+.brand-logo-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: inherit;
+
+  object-fit: cover;
+}
 .water-icon-tile {
   display: grid;
 
