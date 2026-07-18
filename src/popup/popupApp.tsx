@@ -6,26 +6,16 @@ import {
 } from "../shared/storage";
 import type { ReminderSettings } from "../shared/types";
 
-function WaterDropIcon() {
+function LogoIcon(props: {
+  className?: string;
+  alt?: string;
+}) {
   return (
-    <svg
-      aria-hidden="true"
-      className="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M12 2.75S5.5 9.1 5.5 14.25a6.5 6.5 0 0 0 13 0C18.5 9.1 12 2.75 12 2.75Z"
-        fill="currentColor"
-      />
-
-      <path
-        d="M9 15.2a3.2 3.2 0 0 0 3.2 3.2"
-        stroke="white"
-        strokeLinecap="round"
-        strokeWidth="1.7"
-      />
-    </svg>
+    <img
+      alt={props.alt ?? ""}
+      className={props.className}
+      src={chrome.runtime.getURL("icon.png")}
+    />
   );
 }
 
@@ -434,9 +424,12 @@ export default function PopupApp() {
       <section className="water-glass p-4">
         <header className="flex items-center justify-between gap-3">
           <div className="flex min-w-0 items-center gap-3">
-            <div className="water-icon-tile h-11 w-11 shrink-0">
-              <WaterDropIcon />
-            </div>
+          <div className="brand-logo-tile h-11 w-11 shrink-0">
+            <LogoIcon
+              alt=""
+              className="brand-logo-image"
+            />
+          </div>
 
             <div className="min-w-0">
               <h1 className="water-heading text-[25px]">

@@ -7,22 +7,32 @@ export default defineConfig({
     react(),
     viteStaticCopy({
       targets: [
-        { src: "manifest.json", dest: "." }
+        {
+          src: "manifest.json",
+          dest: "."
+        }
       ]
     })
   ],
+
   build: {
     outDir: "dist",
     emptyOutDir: true,
+
     rollupOptions: {
       input: {
+        site: "index.html",
         popup: "popup.html",
         options: "options.html",
         background: "src/background/background.ts"
       },
+
       output: {
         entryFileNames: (chunk) => {
-          if (chunk.name === "background") return "background.js";
+          if (chunk.name === "background") {
+            return "background.js";
+          }
+
           return "assets/[name]-[hash].js";
         }
       }
